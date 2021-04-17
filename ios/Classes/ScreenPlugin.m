@@ -18,6 +18,10 @@
     [[UIScreen mainScreen] setBrightness:brightness.floatValue];
     result(nil);
   }
+  else if ([@"resetBrightness" isEqualToString:call.method]) {
+    // [[UIScreen mainScreen] setBrightness:nil];
+    result(nil);
+  }
   else if ([@"isKeptOn" isEqualToString:call.method]) {
     bool isIdleTimerDisabled =  [[UIApplication sharedApplication] isIdleTimerDisabled];
     result([NSNumber numberWithBool:isIdleTimerDisabled]);

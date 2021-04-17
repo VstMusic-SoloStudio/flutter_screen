@@ -57,7 +57,7 @@ public class ScreenPlugin implements MethodCallHandler, FlutterPlugin, ActivityA
   @Override
   public void onMethodCall(MethodCall call, @NonNull Result result) {
     if(this.activity == null) {
-      result.error("Activity not attached.", null, null);
+      result.success(null);
       return;
     }
     switch(call.method){
@@ -69,6 +69,12 @@ public class ScreenPlugin implements MethodCallHandler, FlutterPlugin, ActivityA
         WindowManager.LayoutParams layoutParams = this.activity.getWindow().getAttributes();
         layoutParams.screenBrightness = (float)brightness;
         this.activity.getWindow().setAttributes(layoutParams);
+        result.success(null);
+        break;
+      case "resetBrightness":
+        WindowManager.LayoutParams params = this.activity.getWindow().getAttributes();
+        params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+        this.activity.getWindow().setAttributes(params);
         result.success(null);
         break;
       case "isKeptOn":
